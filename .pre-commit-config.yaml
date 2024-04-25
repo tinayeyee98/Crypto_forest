@@ -1,0 +1,28 @@
+repos:
+- repo: local
+  hooks:
+    - id: isort
+      name: isort
+      stages: [commit]
+      entry: python3 -m isort
+      args: [app, cron, tests]
+      language: system
+      types: [python]
+      pass_filenames: false
+
+    - id: black
+      name: black
+      stages: [commit]
+      entry: python3 -m black
+      args: [app, cron, tests]
+      language: system
+      types: [python]
+      pass_filenames: false
+
+    - id: test
+      name: test
+      stages: [commit]
+      entry: python3 -m pytest
+      language: system
+      types: [python]
+      pass_filenames: false
