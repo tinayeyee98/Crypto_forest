@@ -23,8 +23,13 @@ services:
     container_name: mysqldb
     ports:
       - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: crypto_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     volumes:
-      - ./data:/data/db
+      - db_data:/var/lib/mysql
     networks:
       - app-network
 

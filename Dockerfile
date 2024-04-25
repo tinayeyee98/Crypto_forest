@@ -1,17 +1,17 @@
-# Use the official python3.8 image as the base image
-FROM python:3.8
+# Use the official python3.10 image as the base image
+FROM python:3.10
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy mini-blog application into the container
+# Copy application into the container
 COPY . .
 
 # Create a virtual environment
 RUN python -m venv .venv
 
 # Activate the virtual environment
-ENV PATH="/app/.venv/bin:$PATH"
+ENV PATH="./app/.venv/bin:$PATH"
 
 # Upgrade pip in the virtual environment
 RUN pip install --no-cache-dir --upgrade pip
@@ -23,4 +23,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # Serve application with uvicorn server.
-ENTRYPOINT ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--factory"]
+ENTRYPOINT ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
